@@ -14,7 +14,7 @@ return new class extends Migration
         //
         schema::create("tipo_respuesta", function (Blueprint $table) {
            $table->id();
-           $table->foreignId("id_pregunta")->references("id")->on("tipo_pregunta");
+           $table->foreignId("id_tipo_pregunta")->references("id")->on("tipo_pregunta");
            $table->string("respuesta");
            $table->boolean("correcta");
            $table->integer("orden");

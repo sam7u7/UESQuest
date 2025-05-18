@@ -14,9 +14,11 @@ return new class extends Migration
         //
         Schema::create('respuesta_usuario', function (Blueprint $table) {
            $table->id();
+           $table->string('respuesta_texto')->nullable();
            $table->foreignId('id_realiza_encuesta')->references('id')->on('realiza_encuesta');
            $table->foreignId('id_pregunta')->references('id')->on('tipo_pregunta');
-           $table->foreignId('id_respuesta')->references('id')->on('tipo_respuesta');
+           $table->foreignId('id_respuesta')->nullable()->references('id')->on('tipo_respuesta');
+           $table->timestamps();
         });
     }
 

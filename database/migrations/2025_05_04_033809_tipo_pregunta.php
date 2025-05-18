@@ -14,7 +14,7 @@ return new class extends Migration
         //
         Schema::create('tipo_pregunta', function (Blueprint $table) {
            $table->id();
-           $table->foreignId('id_tipo_pregunta')->references('id')->on('pregunta_base')->onDelete('cascade');
+           $table->foreignId('id_pregunta')->references('id')->on('pregunta_base')->onDelete('cascade');
            $table->string('tipo_pregunta');
            $table->string('indicacion');
            $table->string('created_by');

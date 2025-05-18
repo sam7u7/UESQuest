@@ -21,6 +21,6 @@ class Rol extends Model
         'deleted_at',
     ];
     public function usuarios(){
-        return $this->hasMany(usuario::class, 'id_rol');
+        return $this->hasMany(Usuario::class, 'id_rol');
     }
 }
