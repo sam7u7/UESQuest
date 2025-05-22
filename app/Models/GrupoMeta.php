@@ -9,7 +9,7 @@ class GrupoMeta extends Model
 {
     //
     use SoftDeletes;
-    protected $table = 'grupos_meta';
+    protected $table = 'grupo_meta';
 
     protected $fillable = [
         'nombre_grupo',

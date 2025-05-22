@@ -9,7 +9,8 @@ class Usuario extends Model
 {
     //
     use SoftDeletes;
-    protected $table = 'usuarios';
+    protected $table = 'usuario';
+    public $timestamps = true;
     protected $fillable = [
         'id_rol',
         'nombre',
@@ -17,9 +18,10 @@ class Usuario extends Model
         'telefono',
         'correo',
         'password',
+        'created_by',
     ];
     protected $dates = [
-        'created_by',
+        
         'deleted_at',
         'created_at',
         'updated_at',

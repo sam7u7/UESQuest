@@ -9,7 +9,7 @@ class GrupoUsuario extends Model
 {
     //
     use SoftDeletes;
-    protected $table = 'grupos_usuario';
+    protected $table = 'grupo_usuario';
     protected $fillable = [
         'grupo_id',
         'usuario_id',
