@@ -34,7 +34,10 @@ class RolController extends Controller
             return response()->json($validator->errors(), 400);
         }
         //dd(request()->all);
-        $rol = Rol::create($request->all());
+        $rol = Rol::create([
+            'nombre_rol' => $request->nombre_rol,
+            'created_by' => 'samael',
+        ]);
 
 
         return response()->json($rol, 201);
