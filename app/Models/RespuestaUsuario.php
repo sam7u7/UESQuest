@@ -24,7 +24,7 @@ class RespuestaUsuario extends Model
     ];
 
     public function pregunta(){
-        return $this->belongsTo(TipoPregunta::class);
+        return $this->belongsTo(preguntaBase::class, 'id_pregunta');
     }
     public function respuesta(){
         return $this->belongsTo(TipoRespuesta::class);

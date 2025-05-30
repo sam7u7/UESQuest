@@ -12,6 +12,7 @@ class PreguntaBase extends Model
     protected $table = 'pregunta_base';
     protected $fillable = [
         'encuesta_id',
+        'id_pregunta',
         'pregunta',
         'ponderacion',
         'created_by'
@@ -27,5 +28,8 @@ class PreguntaBase extends Model
     }
     public function TipoPregunta(){
         return $this->hasMany(TipoPregunta::class,'id_pregunta');
+    }
+    public function respuestaUsuario(){
+        return $this->hasMany(RespuestaUsuario::class,'id_pregunta');
     }
 }

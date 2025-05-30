@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('pregunta_base', function (Blueprint $table) {
             $table->id();
             $table->foreignId('encuesta_id')->references('id')->on('encuesta')->onDelete('cascade');
+            $table->foreignId('id_tipo_pregunta')->references('id')->on('tipo_pregunta');
             $table->string('pregunta');
             $table->double('ponderacion');
             $table->string('created_by');

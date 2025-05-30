@@ -16,7 +16,7 @@ return new class extends Migration
            $table->id();
            $table->string('respuesta_texto')->nullable();
            $table->foreignId('id_realiza_encuesta')->references('id')->on('realiza_encuesta');
-           $table->foreignId('id_pregunta')->references('id')->on('tipo_pregunta');
+           $table->foreignId('id_pregunta')->references('id')->on('pregunta_base');
            $table->foreignId('id_respuesta')->nullable()->references('id')->on('tipo_respuesta');
            $table->timestamps();
         });
