@@ -30,6 +30,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 //rutas a las que solo puede tener acceso el administrador
 Route::middleware(['auth:sanctum', 'rol:Administrador'])->group(function () {
     Route::apiResource('/roles', RolController::class);
+    //Route::apiResource('/grupoMeta', GrupoMetaController::class);
 });
 
 //rutas a las que solo puede acceder Usuario

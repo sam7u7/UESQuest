@@ -36,7 +36,7 @@ class UsuarioController extends Controller
         }
 
         // Puedes agregar aquí el hash del password si es necesario
-        $data = $request->all();
+        $data = $request->only(['id_rol', 'nombre', 'apellido', 'telefono', 'correo', 'password', 'created_by']);
         // $data['password'] = bcrypt($data['password']); // Descomenta si quieres hashear
 
         $usuario = Usuario::create($data);
