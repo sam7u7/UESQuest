@@ -30,14 +30,13 @@ class UsuarioController extends Controller
             'correo'   => 'required|email|unique:"usuario",correo',
             'password' => 'required|string|min:6',
         ]);
-
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
 
         // Puedes agregar aquí el hash del password si es necesario
         $data = $request->all();
-        // $data['password'] = bcrypt($data['password']); // Descomenta si quieres hashear
+        $data['password'] = bcrypt($data['password']);
 
         $usuario = Usuario::create($data);
 
@@ -61,6 +60,8 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, string $id)
     {
+
+
         $usuario = Usuario::find($id);
         if (!$usuario) {
             return response()->json(['error' => 'usuario no encontrado'], 404);
@@ -71,16 +72,21 @@ class UsuarioController extends Controller
             'nombre'   => 'sometimes|string',
             'apellido' => 'sometimes|string',
             'telefono' => 'sometimes|string',
-            'correo'   => 'sometimes|email|unique:"usuario",correo,' . $id,
-            'password' => 'sometimes|string|min:6',
+            'correo'   => 'sometimes|email|unique:"usuario",correo,' . $id. ',id',
+            'password' => 'nullable|string|min:6',
         ]);
 
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
-        $data = $request->all();
-        // $data['password'] = bcrypt($data['password']); // Descomenta si quieres hashear
+        $data = $request->only([
+            'id_rol', 'nombre', 'apellido', 'telefono', 'correo'
+        ]);
+
+        if ($request->filled('password')) {
+            $data['password'] = bcrypt($request->input('password'));
+        }
 
         $usuario->update($data);
 
