@@ -25,12 +25,14 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('/logout',[AuthController::class,'logout']);
     Route::get('/me',[AuthController::class,'me']);
     //Route::apiResource('/roles', RolController::class);
+    // Obtener datos del usuario autenticado
+    Route::get('/usuarios/me', [UsuarioController::class, 'showOwn']);
 });
 
 //rutas a las que solo puede tener acceso el administrador
 Route::middleware(['auth:sanctum', 'rol:Administrador'])->group(function () {
     Route::apiResource('/roles', RolController::class);
-    Route::apiResource('/usuarios', UsuarioController::class);
+    //Route::apiResource('/grupoMeta', GrupoMetaController::class);
 });
 
 //rutas a las que solo puede acceder Usuario
@@ -52,9 +54,22 @@ Route::apiResource('/preguntaBase', PreguntaBaseController::class);
 Route::apiResource('/tipoPregunta', TipoPreguntaController::class);
 Route::apiResource('/tipoRespuesta', TipoRespuestaController::class);
 
-
+Route::apiResource('/usuarios', UsuarioController::class);
 Route::apiResource('/grupoUsuario', GrupoUsuarioController::class);
 Route::apiResource('/grupoMeta', GrupoMetaController::class);
+
+// Crear usuario como usuario regular (forzado id_rol = 1)
+Route::post('/usuarios/usuario', [UsuarioController::class, 'storeRegularUser']);
+
+
+
+// Editar usuario regular
+Route::put('/usuarios/usuario/{id}', [UsuarioController::class, 'updateRegularUser']);
+
+//editar contraseña
+Route::put('/usuarios/{id}/cambiar-password', [UsuarioController::class, 'cambiarPassword']);
+
+
 
 //Route::apiResource('/roles', RolController::class);
 
