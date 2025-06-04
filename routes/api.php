@@ -33,6 +33,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::middleware(['auth:sanctum', 'rol:Administrador'])->group(function () {
     Route::apiResource('/roles', RolController::class);
     //Route::apiResource('/grupoMeta', GrupoMetaController::class);
+    Route::apiResource('/usuarios', UsuarioController::class);
 });
 
 //rutas a las que solo puede acceder Usuario
@@ -54,7 +55,7 @@ Route::apiResource('/preguntaBase', PreguntaBaseController::class);
 Route::apiResource('/tipoPregunta', TipoPreguntaController::class);
 Route::apiResource('/tipoRespuesta', TipoRespuestaController::class);
 
-Route::apiResource('/usuarios', UsuarioController::class);
+
 Route::apiResource('/grupoUsuario', GrupoUsuarioController::class);
 Route::apiResource('/grupoMeta', GrupoMetaController::class);
 
