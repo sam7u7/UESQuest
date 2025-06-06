@@ -28,7 +28,7 @@ class PreguntaBaseController extends Controller
             'pregunta' => 'required|string',
             'ponderacion' => 'required|numeric',
             'encuesta_id' => 'required|integer',
-            'id_pregunta' => 'required|integer',
+            'id_tipo_pregunta' => 'required|integer',
             'created_by' => 'required|string',
         ]);
 
@@ -67,7 +67,7 @@ class PreguntaBaseController extends Controller
 
         $validator = Validator::make($request->all(), [
             'encuesta_id' => 'required|integer',
-            'id_pregunta' => 'required|integer',
+            'id_tipo_pregunta' => 'required|integer',
             'pregunta' => 'required|string',
             'ponderacion' => 'required|numeric',
             'created_by' => 'required|string',

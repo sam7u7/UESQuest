@@ -24,7 +24,7 @@ class TipoPregunta extends Model
         'updated_at',
     ];
     public function pregunta_base(){
-        return $this->belongsTo(PreguntaBase::class);
+        return $this->belongsTo(PreguntaBase::class, 'id_tipo_pregunta');
     }
     public function TipoRespuesta(){
         return $this->hasMany(TipoRespuesta::class,'id_tipo_pregunta');

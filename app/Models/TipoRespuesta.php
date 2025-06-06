@@ -12,7 +12,7 @@ class TipoRespuesta extends Model
 
     protected $table = 'tipo_respuesta';
     protected $fillable = [
-        'id_tipo_pregunta',
+        'id_pregunta',
         'respuesta',
         'correcta',
         'orden',
@@ -25,8 +25,8 @@ class TipoRespuesta extends Model
         'updated_at',
     ];
 
-    public function tipoPregunta(){
-        return $this->belongsTo(TipoPregunta::class);
+    public function preguntaBase(){
+        return $this->belongsTo(PreguntaBase::class, 'id_pregunta');
     }
     public function preguntaTipoRespuesta(){
         return $this->hasMany(RespuestaUsuario::class,'id_respuesta');

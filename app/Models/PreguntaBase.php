@@ -12,7 +12,7 @@ class PreguntaBase extends Model
     protected $table = 'pregunta_base';
     protected $fillable = [
         'encuesta_id',
-        'id_pregunta',
+        'id_tipo_pregunta',
         'pregunta',
         'ponderacion',
         'created_by'
@@ -27,9 +27,12 @@ class PreguntaBase extends Model
         return $this->belongsTo(Encuesta::class);
     }
     public function TipoPregunta(){
-        return $this->hasMany(TipoPregunta::class,'id_pregunta');
+        return $this->hasMany(TipoPregunta::class,'id_tipo_pregunta');
     }
     public function respuestaUsuario(){
         return $this->hasMany(RespuestaUsuario::class,'id_pregunta');
+    }
+    public function tipoRespuesta(){
+        return $this->hasMany(TipoRespuesta::class,'id_pregunta');
     }
 }
