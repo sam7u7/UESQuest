@@ -23,8 +23,8 @@ class TipoPreguntaController extends Controller
      */
     public function store(Request $request)
     {
-        $validator = Validator::make($request->all(), [
-            'id_pregunta' => 'required|integer',
+        $validator = Validator::make($request->all(),
+         [
             'tipo_pregunta' => 'required|string',
             'indicacion' => 'required|string',
         ]);
@@ -63,7 +63,7 @@ class TipoPreguntaController extends Controller
         }
 
         $validator = Validator::make($request->all(), [
-            'id_pregunta' => 'required|integer',
+
             'tipo_pregunta' => 'required|string',
             'indicacion' => 'required|string',
         ]);
