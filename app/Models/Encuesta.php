@@ -11,14 +11,18 @@ class Encuesta extends Model
     //
     use SoftDeletes;
     protected $table = 'encuesta';
+
     protected $fillable = [
-      'id_usuario',
-      'id_grupo',
-      'titulo',
-      'objetivo',
-      'indicacion',
-      'created_by',
+        'id_usuario',
+        'id_grupo',
+        'titulo',
+        'objetivo',
+        'indicacion',
+        'fecha_inicio',
+        'fecha_fin',
+        'created_by',
     ];
+
     protected $dates = [
         'deleted_at',
         'created_at',
@@ -26,10 +30,10 @@ class Encuesta extends Model
     ];
 
     public function Usuario(){
-        return $this->belongsTo(Usuario::class);
+        return $this->belongsTo(Usuario::class, 'id_usuario');
     }
     public function Grupo(){
-        return $this->belongsTo(GrupoMeta::class);
+        return $this->belongsTo(GrupoMeta::class, 'id_grupo');
     }
 
     public function EncuestaPregunta(){

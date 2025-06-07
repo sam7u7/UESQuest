@@ -16,7 +16,7 @@ class EncuestaController extends Controller
     public function index()
     {
         //
-        $encuestas = Encuesta::all();
+        $encuestas = Encuesta::with(['usuario','grupo'])->get();
         return response()->json($encuestas);
 
     }
@@ -31,9 +31,11 @@ class EncuestaController extends Controller
             'id_usuario' => 'required|integer',
             'id_grupo' => 'required|integer',
             'titulo' => 'required|string',
+            'objetivo' => 'required|string',
             'indicacion' => 'required|string',
             'fecha_inicio' => 'required|date',
-            'fecha_fin' => 'required|date',
+            'fecha_fin' => 'required|date|after:fecha_inicio',
+            'created_by' => 'required|string',
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
@@ -64,12 +66,13 @@ class EncuestaController extends Controller
         }
         $encuesta->updated_at = now(date_default_timezone_get());
         $validator = Validator::make($request->all(), [
-            'id_usuario' => 'required|integer',
             'id_grupo' => 'required|integer',
             'titulo' => 'required|string',
+            'objetivo' => 'required|string',
             'indicacion' => 'required|string',
             'fecha_inicio' => 'required|date',
-            'fecha_fin' => 'required|date',
+            'fecha_fin' => 'required|date|after:fecha_inicio',
+            'created_by' => 'required|string',
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);

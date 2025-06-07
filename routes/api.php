@@ -19,6 +19,8 @@ use App\Http\Controllers\Api\GrupoUsuarioController;
 
 //ruta para login
 Route::post('/login',[AuthController::class,'login']);
+//ruta para envio de contraseña
+Route::post('/forgot-password', [AuthController::class, 'sendProvisionalPassword']);
 //Route::get('/me',[AuthController::class,'me']);
 //ruta para logout y obtener informacion del usuario logeado en el sistema
 Route::middleware(['auth:sanctum'])->group(function () {
@@ -34,6 +36,7 @@ Route::middleware(['auth:sanctum', 'rol:Administrador'])->group(function () {
     Route::apiResource('/roles', RolController::class);
     //Route::apiResource('/grupoMeta', GrupoMetaController::class);
     Route::apiResource('/usuarios', UsuarioController::class);
+    Route::apiResource('/encuestas', EncuestaController::class);
 });
 
 //rutas a las que solo puede acceder Usuario
@@ -47,7 +50,7 @@ Route::options('/{any}', function () {
 })->where('any', '.*');
 
 //Route::apiResource('/roles', RolController::class);
-Route::apiResource('/encuestas', EncuestaController::class);
+//Route::apiResource('/encuestas', EncuestaController::class);
 Route::apiResource('/encuestaRealizada', RealizaEncuestaController::class);
 Route::apiResource('/respuestasUsuario', RespuestaUsuarioController::class);
 
