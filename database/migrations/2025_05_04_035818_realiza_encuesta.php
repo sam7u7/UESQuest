@@ -16,9 +16,6 @@ return new class extends Migration
            $table->id();
            $table->foreignId('id_usuario')->references('id')->on('usuario')->onDelete('cascade');
            $table->foreignId('id_encuesta')->references('id')->on('encuesta')->onDelete('cascade');
-           $table->date('fecha_inicio');
-           $table->date('fecha_fin');
-           $table->string('created_by');
            $table->softDeletes();
            $table->timestamps();
         });

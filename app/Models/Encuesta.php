@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Encuesta extends Model
 {
     //
+
     use SoftDeletes;
     protected $table = 'encuesta';
 
@@ -36,7 +37,7 @@ class Encuesta extends Model
         return $this->belongsTo(GrupoMeta::class, 'id_grupo');
     }
 
-    public function EncuestaPregunta(){
+    public function preguntas(){
         return $this->hasMany(PreguntaBase::class, 'encuesta_id');
     }
     public function EncuestaRealizada(){

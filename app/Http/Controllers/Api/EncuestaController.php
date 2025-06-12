@@ -4,8 +4,12 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Encuesta;
+use App\Models\PreguntaBase;
+use App\Models\TipoPregunta;
+use App\Models\TipoRespuesta;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Http\Resources\EncuestaResource;
 use Illuminate\Http\Request;
 
 class EncuestaController extends Controller
@@ -18,6 +22,41 @@ class EncuestaController extends Controller
         //
         $encuestas = Encuesta::with(['usuario','grupo'])->get();
         return response()->json($encuestas);
+
+    }
+    public function encuestaPregunta(){
+        $encuestas = Encuesta::with('preguntas.tipoPreguntas')->get();
+        return response()->json($encuestas);
+    }
+
+    public function showEncuestaPregunta($id)
+    {
+        /*$encuesta = Encuesta::with(['preguntas.tipoPregunta'])->find($id);
+
+        if (!$encuesta) {
+            return response()->json(['message' => 'Encuesta no encontrada'], 404);
+        }
+
+        return response()->json($encuesta);*/
+        $encuesta[] = Encuesta::find($id);
+        $encuesta['preguntas'] = PreguntaBase::where('encuesta_id',$id)->get();
+        foreach ($encuesta['preguntas'] as $pregunta) {
+            $pregunta['tipo_preguntas'] = TipoPregunta::where('id',$pregunta->id_tipo_pregunta)->get();
+        }
+        return response()->json($encuesta);
+    }
+
+    public function showEncuestaPreguntasRespuestas($id){
+
+        $encuesta[] = Encuesta::find($id);
+        $encuesta['preguntas'] = PreguntaBase::where('encuesta_id',$id)->get();
+        foreach ($encuesta['preguntas'] as $pregunta) {
+            $pregunta['tipo_respuestas'] = TipoRespuesta::where('id_pregunta',$pregunta->id)->get();
+            $pregunta['tipo_preguntas'] = TipoPregunta::where('id',$pregunta->id_tipo_pregunta)->get();
+        }
+
+        //$encuesta = Encuesta::with('preguntas.tipoRespuesta','preguntas.tipoPregunta')->findOrFail($id);
+        return response()->json($encuesta);
 
     }
 

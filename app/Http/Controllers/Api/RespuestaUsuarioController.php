@@ -23,8 +23,20 @@ class RespuestaUsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $validator = Validator::make($request->all(), [
+        //dd($request->all());
+        $respuestas = $request->all();
+        foreach ($respuestas as $repuesta) {
+           RespuestaUsuario::create([
+              'id_realiza_encuesta' => $repuesta['id_realiza_encuesta'],
+              'id_pregunta'=>$repuesta['id_pregunta'],
+               'id_respuesta'=>$repuesta['id_respuesta'],
+               'created_at'=>$repuesta['created_at'],
+               'updated_at'=>$repuesta['updated_at'],
+               'respuesta_texto'=>$repuesta['respuesta_texto'],
+           ]);
+        }
+
+        /*$validator = Validator::make($request->all(), [
             'respuesta' => 'string',
             'id_realiza_encuesta' => 'integer',
             'id_pregunta' => 'integer',
@@ -32,9 +44,9 @@ class RespuestaUsuarioController extends Controller
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
-        }
-        $Repuesta = RespuestaUsuario::create($request->all());
-        return response()->json($Repuesta, 201);
+        }*/
+        //$Repuesta = RespuestaUsuario::create($request->all());
+        return response()->json($respuestas, 201);
     }
 
     /**

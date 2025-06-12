@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\PreguntaBase;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -26,6 +27,7 @@ class EncuestaResource extends JsonResource
 
             'grupo' => new GrupoMetaResource($this->whenLoaded('grupo')),
             'usuario' => new UsuarioResource($this->whenLoaded('usuario')),
+            'preguntas' => PreguntaBaseResources::collection($this->whenLoaded('preguntas')),
         ];
     }
 }

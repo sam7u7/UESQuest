@@ -18,13 +18,22 @@ class TipoRespuestaController extends Controller
         return response()->json($respuestas);
     }
 
+    public function respuestaPregunta(Request $request){
+
+        //dd($request->id);
+        $respuestas = TipoRespuesta::where('id_pregunta',$request->id)->get();
+        //dd($respuestas->toArray());
+        return response()->json($respuestas);
+    }
+
+
     /**
      * Almacenar una nueva respuesta.
      */
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'id_tipo_pregunta' => 'required|integer',
+            'id_pregunta' => 'required|integer',
             'respuesta' => 'required|string',
             'correcta' => 'required|boolean',
             'orden' => 'required|integer',

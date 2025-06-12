@@ -24,10 +24,10 @@ class PreguntaBase extends Model
     ];
 
     public function encuesta(){
-        return $this->belongsTo(Encuesta::class);
+        return $this->belongsTo(Encuesta::class, 'encuesta_id');
     }
-    public function TipoPregunta(){
-        return $this->hasMany(TipoPregunta::class,'id_tipo_pregunta');
+    public function tipoPregunta(){
+        return $this->belongsTo(TipoPregunta::class,'id');
     }
     public function respuestaUsuario(){
         return $this->hasMany(RespuestaUsuario::class,'id_pregunta');

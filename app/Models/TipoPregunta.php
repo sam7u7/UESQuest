@@ -10,9 +10,9 @@ class TipoPregunta extends Model
     use SoftDeletes;
 
     protected $table = 'tipo_pregunta';
+    //protected $primaryKey = 'id';
 
     protected $fillable = [
-        'id_pregunta',
         'tipo_pregunta',
         'indicacion',
         'created_by',
@@ -23,12 +23,10 @@ class TipoPregunta extends Model
         'created_at',
         'updated_at',
     ];
-    public function pregunta_base(){
-        return $this->belongsTo(PreguntaBase::class, 'id_tipo_pregunta');
+    public function preguntaBase(){
+        return $this->hasMany(PreguntaBase::class,'id_tipo_pregunta');
     }
-    public function TipoRespuesta(){
-        return $this->hasMany(TipoRespuesta::class,'id_tipo_pregunta');
-    }
+
     public function RespuestaTipoPregunta(){
         return $this->hasMany(RespuestaUsuario::class,'id_pregunta');
     }

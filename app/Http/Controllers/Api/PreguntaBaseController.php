@@ -18,6 +18,10 @@ class PreguntaBaseController extends Controller
         $preguntas = PreguntaBase::all();
         return response()->json($preguntas);
     }
+    public function preguntaEncuesta(){
+        $preEncuestas = PreguntaBase::with('encuesta')->get();
+        return response()->json($preEncuestas);
+    }
 
     /**
      * Store a newly created resource in storage.

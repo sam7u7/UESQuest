@@ -28,8 +28,8 @@ class RealizaEncuestaController extends Controller
         $validator = Validator::make($request->all(), [
             'id_usuario' => 'required|integer',
             'id_encuesta' => 'required|integer',
-            'fecha_inicio' => 'required|date',
-            'fecha_fin' => 'date|after:fecha_inicio',
+            'created_at' => 'required',
+            'updated_at' => 'date|after:created_at',
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);

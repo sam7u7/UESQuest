@@ -36,7 +36,7 @@ Route::middleware(['auth:sanctum', 'rol:Administrador'])->group(function () {
     Route::apiResource('/roles', RolController::class);
     //Route::apiResource('/grupoMeta', GrupoMetaController::class);
     Route::apiResource('/usuarios', UsuarioController::class);
-    Route::apiResource('/encuestas', EncuestaController::class);
+    //Route::apiResource('/encuestas', EncuestaController::class);
 });
 
 //rutas a las que solo puede acceder Usuario
@@ -50,13 +50,21 @@ Route::options('/{any}', function () {
 })->where('any', '.*');
 
 //Route::apiResource('/roles', RolController::class);
-//Route::apiResource('/encuestas', EncuestaController::class);
+Route::apiResource('/encuestas', EncuestaController::class);
 Route::apiResource('/encuestaRealizada', RealizaEncuestaController::class);
 Route::apiResource('/respuestasUsuario', RespuestaUsuarioController::class);
 
 Route::apiResource('/preguntaBase', PreguntaBaseController::class);
+Route::get('/preguntaEncuesta',[PreguntaBaseController::class,'preguntaEncuesta']);
+
+//traer todas las encuestas->preguntas->tipo_preguntas
+Route::get('/encuestaPregunta',[EncuestaController::class,'encuestaPregunta']);
+Route::get('/encuestaPregunta/{id}',[EncuestaController::class,'showEncuestaPregunta']);
+Route::get('/encuestaPreguntaForm/{id}',[EncuestaController::class,'showEncuestaPreguntasRespuestas']);
+
 Route::apiResource('/tipoPregunta', TipoPreguntaController::class);
 Route::apiResource('/tipoRespuesta', TipoRespuestaController::class);
+Route::get('/tipoRespuesta/respuesta/{id}',[TipoRespuestaController::class,'respuestaPregunta']);
 
 
 Route::apiResource('/grupoUsuario', GrupoUsuarioController::class);
