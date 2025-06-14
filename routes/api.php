@@ -11,7 +11,7 @@ use App\Http\Controllers\Api\RespuestaUsuarioController;
 use App\Http\Controllers\Api\PreguntaBaseController;
 use App\Http\Controllers\Api\TipoPreguntaController;
 use App\Http\Controllers\Api\TipoRespuestaController;
-
+use App\Http\Controllers\Api\EstadoUsuarioController;
 use App\Http\Controllers\Api\UsuarioController;
 use App\Http\Controllers\Api\GrupoUsuarioController;
 
@@ -30,6 +30,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     // Obtener datos del usuario autenticado
     Route::get('/usuarios/me', [UsuarioController::class, 'showOwn']);
     Route::get('/mis-encuestas', [EncuestaController::class, 'misEncuestas']);
+    Route::get('/usuarios/estado-usuarios', [EstadoUsuarioController::class, 'index']); // Obtener todos (activos e inactivos)
+    Route::post('/usuarios/{id}/restaurar', [EstadoUsuarioController::class, 'restore']); // Restaurar un usuario
+    Route::delete('/usuarios/{id}/inhabilitar', [EstadoUsuarioController::class, 'deactivate']); // Inhabilitar un usuario (soft delete)
 });
 
 //rutas a las que solo puede tener acceso el administrador
