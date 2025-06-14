@@ -27,6 +27,8 @@ class TipoRespuestaController extends Controller
     }
 
 
+
+
     /**
      * Almacenar una nueva respuesta.
      */
