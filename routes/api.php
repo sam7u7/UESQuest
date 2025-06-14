@@ -29,6 +29,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
     //Route::apiResource('/roles', RolController::class);
     // Obtener datos del usuario autenticado
     Route::get('/usuarios/me', [UsuarioController::class, 'showOwn']);
+    Route::get('/mis-encuestas', [EncuestaController::class, 'misEncuestas']);
 });
 
 //rutas a las que solo puede tener acceso el administrador

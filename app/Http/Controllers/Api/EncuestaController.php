@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Http\Resources\EncuestaResource;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class EncuestaController extends Controller
 {
@@ -142,4 +143,15 @@ class EncuestaController extends Controller
         $encuesta->delete();
         return response()->json(['message'=>'encuesta eliminada', 204]);
     }
+
+ public function misEncuestas()
+{
+    $usuarioId = Auth::id(); // obtiene el id del usuario autenticado
+
+    $encuestas = Encuesta::with(['usuario', 'grupo'])
+        ->where('id_usuario', $usuarioId)
+        ->get();
+
+    return response()->json($encuestas);
+}
 }
