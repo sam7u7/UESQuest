@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class RespuestaUsuario extends Model
 {
     //
-    use SoftDeletes;
+
 
     protected $table = 'respuesta_usuario';
 
@@ -30,6 +30,6 @@ class RespuestaUsuario extends Model
         return $this->belongsTo(TipoRespuesta::class);
     }
     public function realizaEncuesta(){
-        return $this->belongsTo(RealizaEncuesta::class);
+        return $this->belongsTo(RealizaEncuesta::class,'id');
     }
 }

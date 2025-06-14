@@ -60,7 +60,10 @@ Route::get('/preguntaEncuesta',[PreguntaBaseController::class,'preguntaEncuesta'
 //traer todas las encuestas->preguntas->tipo_preguntas
 Route::get('/encuestaPregunta',[EncuestaController::class,'encuestaPregunta']);
 Route::get('/encuestaPregunta/{id}',[EncuestaController::class,'showEncuestaPregunta']);
+//para traer las encuestas con sus preguntas y respuestas
 Route::get('/encuestaPreguntaForm/{id}',[EncuestaController::class,'showEncuestaPreguntasRespuestas']);
+//para traer las respeustas de usuarios
+Route::get('/Encuestas/datos/{id}',[EncuestaController::class,'showEncuestaRespuestas']);
 
 Route::apiResource('/tipoPregunta', TipoPreguntaController::class);
 Route::apiResource('/tipoRespuesta', TipoRespuestaController::class);
@@ -72,6 +75,7 @@ Route::apiResource('/grupoMeta', GrupoMetaController::class);
 
 // Crear usuario como usuario regular (forzado id_rol = 1)
 Route::post('/usuarios/usuario', [UsuarioController::class, 'storeRegularUser']);
+
 
 
 

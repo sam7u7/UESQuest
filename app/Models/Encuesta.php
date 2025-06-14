@@ -41,6 +41,6 @@ class Encuesta extends Model
         return $this->hasMany(PreguntaBase::class, 'encuesta_id');
     }
     public function EncuestaRealizada(){
-        return $this->hasMany(Encuesta::class,'id_encuesta');
+        return $this->hasMany(RealizaEncuesta::class,'id_encuesta');
     }
 }

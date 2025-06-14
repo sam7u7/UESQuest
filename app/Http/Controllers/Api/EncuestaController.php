@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Encuesta;
 use App\Models\PreguntaBase;
+use App\Models\RealizaEncuesta;
+use App\Models\RespuestaUsuario;
 use App\Models\TipoPregunta;
 use App\Models\TipoRespuesta;
 use Illuminate\Support\Facades\Validator;
@@ -58,6 +60,15 @@ class EncuestaController extends Controller
         //$encuesta = Encuesta::with('preguntas.tipoRespuesta','preguntas.tipoPregunta')->findOrFail($id);
         return response()->json($encuesta);
 
+    }
+    public function showEncuestaRespuestas($id){
+        /*$encuesta[] = Encuesta::find($id);
+        $encuesta['realizadas'] = RealizaEncuesta::where('id_encuesta',$id)->get();
+        foreach ($encuesta['realizadas'] as $realizada) {
+            $realizada['respuestas'] = RespuestaUsuario::where('id',$realizada->id)->get();
+        }*/
+        $encuesta = Encuesta::with('preguntas.TipoRespuesta','encuestaRealizada.preguntaRealizaPregunta')->find($id);
+        return response()->json($encuesta);
     }
 
     /**
