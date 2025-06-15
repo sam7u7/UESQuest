@@ -144,14 +144,18 @@ class EncuestaController extends Controller
         return response()->json(['message'=>'encuesta eliminada', 204]);
     }
 
- public function misEncuestas()
-{
-    $usuarioId = Auth::id(); // obtiene el id del usuario autenticado
+    public function misEncuestas()
+    {
+        $usuarioId = Auth::id();
 
-    $encuestas = Encuesta::with(['usuario', 'grupo'])
-        ->where('id_usuario', $usuarioId)
-        ->get();
+        // Obtiene todos los ID de grupos a los que el usuario pertenece
+        $gruposUsuario = \App\Models\GrupoUsuario::where('usuario_id', $usuarioId)->pluck('grupo_id');
 
-    return response()->json($encuestas);
-}
+        // Busca encuestas asociadas a esos grupos
+        $encuestas = Encuesta::with(['usuario', 'grupo'])
+            ->whereIn('id_grupo', $gruposUsuario)
+            ->get();
+
+        return response()->json($encuestas);
+    }
 }
