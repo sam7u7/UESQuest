@@ -15,6 +15,7 @@ use App\Http\Resources\EncuestaResource;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class EncuestaController extends Controller
 {
     /**
@@ -23,6 +24,9 @@ class EncuestaController extends Controller
     public function index()
     {
         //
+        \DB::statement('SELECT marcar_encuestas_finalizadas()');
+
+
         $encuestas = Encuesta::with(['usuario','grupo'])->get();
         return response()->json($encuestas);
 

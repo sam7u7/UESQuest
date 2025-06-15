@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\RealizaEncuesta;
+use Illuminate\Database\QueryException;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Http\Request;
@@ -28,13 +29,24 @@ class RealizaEncuestaController extends Controller
         $validator = Validator::make($request->all(), [
             'id_usuario' => 'required|integer',
             'id_encuesta' => 'required|integer',
-            'created_at' => 'required',
-            'updated_at' => 'date|after:created_at',
         ]);
         if ($validator->fails()) {
             return response()->json($validator->errors(), 400);
         }
-        $realizaEncuesta = RealizaEncuesta::create($request->all());
+
+        try{
+            $realizaEncuesta = RealizaEncuesta::create($request->all());
+        }catch(QueryException $e){
+            $mensajeError = $e->getMessage();
+
+                return response()->json([
+                    'message' => 'Este usuario ya ha realizado esta encuesta.',
+                    'details' => $mensajeError
+                ], 409);
+
+            return response()->json('mesagge');
+        }
+
         return response()->json($realizaEncuesta,201);
     }
 

@@ -43,4 +43,6 @@ class Encuesta extends Model
     public function EncuestaRealizada(){
         return $this->hasMany(RealizaEncuesta::class,'id_encuesta');
     }
+
+
 }
